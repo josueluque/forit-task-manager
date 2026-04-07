@@ -1,76 +1,58 @@
 import { Task } from '../model/task'
 import { randomUUID } from 'crypto'
+import { HttpError } from '../utils/httpError'
 
 // Array de tareas con memoria temporal
 const tasks: Task[] = []
 
 export const getTasks = async (): Promise<Task[]> => {
-  try {
-    return tasks
-  } catch (error) {
-    throw new Error('Error al obtener las tareas');
-  }
+  return tasks
+
 }
 
 export const createTask = async (title: string, description: string): Promise<Task> => {
-  try {
-    if (!title) {
-        throw new Error('El título es obligatorio');
-    }
-              
-    const newTask: Task = {
-      id: randomUUID(),
-      title,
-      description: description || '',
-      completed: false,
-      createdAt: new Date()
-    }
-
-    tasks.push(newTask)
-    return newTask
-  } catch (error) {
-    throw new Error('Error al crear la tarea');
+  if (!title) {
+      throw new HttpError('El título es obligatorio ', 400);
   }
+            
+  const newTask: Task = {
+    id: randomUUID(),
+    title,
+    description: description || '',
+    completed: false,
+    createdAt: new Date()
+  }
+
+  tasks.push(newTask)
+  return newTask
 }
 
 export const updateTask = async (id: string, data: any): Promise<Task | null> => {
-  try {
-    const taskIndex = tasks.findIndex(task => task.id === id)
+  const taskIndex = tasks.findIndex(task => task.id === id)
 
-    if (taskIndex === -1) throw new Error('Tarea no encontrada')
+  if (taskIndex === -1) throw new HttpError('Tarea no encontrada', 404)
 
-    const allowedUpdates = ['title', 'description', 'completed']
+  const allowedUpdates = ['title', 'description', 'completed']
 
-    allowedUpdates.forEach(field => {
-      if (data[field] !== undefined) {
-        (tasks[taskIndex] as any)[field as keyof Task] = data[field]
-      }
-    })
+  allowedUpdates.forEach(field => {
+    if (data[field] !== undefined) {
+      (tasks[taskIndex] as any)[field as keyof Task] = data[field]
+    }
+  })
 
-    return tasks[taskIndex]
-  } catch (error) {
-    throw new Error('Error al actualizar la tarea ' + error);
-  }
+  return tasks[taskIndex]
 }
 
 
 export const deleteTask = async (id: string): Promise<boolean> => {
-  try {
-    const taskIndex = tasks.findIndex(task => task.id === id)
-    if (taskIndex === -1) throw new Error('Tarea no encontrada')
+  const taskIndex = tasks.findIndex(task => task.id === id)
+  if (taskIndex === -1) throw new HttpError('Tarea no encontrada', 404)
 
-    tasks.splice(taskIndex, 1)
-    return true
-  } catch (error) {
-    throw new Error('Error al eliminar la tarea ' + error);
-  }
+  tasks.splice(taskIndex, 1)
+  return true
 }
 
 export const getTaskById = async (id: string): Promise<Task | null> => {
-  try {  
-    const task = tasks.find(task => task.id === id)
-    return task || null
-  } catch (error) {
-    throw new Error('Error al obtener la tarea ' + error);
-  }
+  const task = tasks.find(task => task.id === id)
+  return task || null
 }

@@ -1,13 +1,14 @@
 import { Request, Response, NextFunction } from 'express'
 
 export const errorHandler = (
-    err: Error,
-    _req: Request,
-    res: Response,
-    _next: NextFunction
+  err: Error & { status?: number },
+  _req: Request,
+  res: Response,
+  _next: NextFunction
 ): void => {
       
   console.error(err.message);
 
-  res.status(500).json({ error: 'Error interno del servidor' })
+  res.status(err.status || 500).json({ 
+    message: err.message ||'Error interno del servidor' })
 }
