@@ -8,6 +8,7 @@ const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([])
   const [showForm, setShowForm] = useState(false)
   const [taskToEdit, setTaskToEdit] = useState<Task | null>(null)
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     fetchTasks()
@@ -67,6 +68,11 @@ const TaskList = () => {
     setShowForm(true)
   }
 
+  const filteredTasks = tasks.filter(task =>
+    task.title.toLowerCase().includes(search.toLowerCase()) ||
+    task.description.toLowerCase().includes(search.toLowerCase())
+  )
+
   const handleCancel = () => {
     setTaskToEdit(null)
     setShowForm(false)
@@ -87,8 +93,16 @@ const TaskList = () => {
           )}
         </div>
 
+        <input
+          type="text"
+          placeholder="Buscar tareas..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className="w-full bg-[#0a1220] border border-[#0f1e35] rounded-lg px-3 py-2 text-sm text-[#f0f9ff] placeholder-[#334d66] mb-6 focus:outline-none focus:border-[#0284c7]"
+        />
+
         {showForm && (
-          <div className="fixed inset-0 bg-black/70 flex items-center justify-center px-4">
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center px-4">
               <TaskForm
                 onSubmit={taskToEdit ? handleUpdate : handleCreate}
                 onCancel={handleCancel}
@@ -98,10 +112,10 @@ const TaskList = () => {
         )}
 
         <div className="flex flex-col gap-3">
-          {tasks.length === 0 ? (
+          {filteredTasks.length === 0 ? (
             <p className="text-gray-600 text-sm text-center py-8">No hay tareas todavia</p>
         ) : (
-            tasks.map(task => (
+            filteredTasks.map(task => (
             <TaskItem
               key={task.id}
               task={task}
