@@ -1,8 +1,13 @@
-function App() {
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import TaskList from './components/TaskList'
+
+const App = () => {
   return (
-    <div>
-      <h1>Task Manager</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<TaskList />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
