@@ -10,6 +10,7 @@ interface TaskFormProps {
 const TaskForm = ({ onSubmit, onCancel, taskToEdit }: TaskFormProps) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [error, setError] = useState('')
 
   useEffect(() => {
     if (taskToEdit) {
@@ -19,8 +20,11 @@ const TaskForm = ({ onSubmit, onCancel, taskToEdit }: TaskFormProps) => {
   }, [taskToEdit])
 
   const handleSubmit = () => {
-    if (!title.trim()) return
-    console.log('Submitting:', { title, description })
+    if (!title.trim()) {
+      setError('El titulo es requerido')
+      return
+    }
+    setError('')
     onSubmit(title, description)
     setTitle('')
     setDescription('')
@@ -38,6 +42,10 @@ const TaskForm = ({ onSubmit, onCancel, taskToEdit }: TaskFormProps) => {
         onChange={e => setTitle(e.target.value)}
         className="w-full bg-[#0f1117] border border-[#2a2d3a] rounded-lg px-3 py-2 text-sm text-gray-100 placeholder-gray-600 mb-3 focus:outline-none focus:border-blue-500"
       />
+      {error && (
+        <p className="text-xs text-[#da3333] mb-3 w-88">{error}</p>
+      )}
+      
       <textarea
         placeholder="Descripción opcional"
         value={description}
@@ -47,17 +55,19 @@ const TaskForm = ({ onSubmit, onCancel, taskToEdit }: TaskFormProps) => {
       <div className="flex gap-2 justify-end">
         <button
           onClick={onCancel}
-          className="text-xs text-[#e8eef8] border border-[#1c2a3f] rounded-lg px-4 py-2 cursor-pointer hover:bg-[#1c2a3f] transition-colors"
+          className="text-xs text-gray-100 border border-[#1c2a3f] rounded-lg px-4 py-2 cursor-pointer hover:bg-[#1c2a3f] transition-colors"
         >
           Cancelar
         </button>
         <button
           onClick={handleSubmit}
-          className="text-xs text-white bg-[#0b38ff] rounded-lg px-4 py-2 cursor-pointer hover:bg-[#1540ff] transition-colors"
+          className="text-xs text-gray-100 bg-[#0b38ff] rounded-lg px-4 py-2 cursor-pointer hover:bg-[#1540ff] transition-colors"
         >
           {taskToEdit ? 'Guardar' : 'Agregar'}
         </button>
       </div>
+
+      
     </div>
   )
 }

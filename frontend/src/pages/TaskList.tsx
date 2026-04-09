@@ -76,11 +76,11 @@ const TaskList = () => {
     <div className="min-h-screen bg-[#0a0f1e] px-4 py-8">
       <div className="max-w-xl mx-auto">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-white text-xl font-medium">Mis tareas</h1>
+          <h1 className="text-gray-100 text-xl font-medium">Mis tareas</h1>
           {!showForm && (
             <button
               onClick={() => setShowForm(true)}
-              className="text-xs font-medium text-white bg-[#0b38ff] rounded-lg px-4 py-2 cursor-pointer hover:bg-[#1540ff] transition-colors"
+              className="text-xs font-medium text-gray-100 bg-[#0b38ff] rounded-lg px-4 py-2 cursor-pointer hover:bg-[#1540ff] transition-colors"
             >
               Agregar tarea
             </button>
@@ -100,17 +100,17 @@ const TaskList = () => {
         <div className="flex flex-col gap-3">
           {tasks.length === 0 ? (
             <p className="text-gray-600 text-sm text-center py-8">No hay tareas todavia</p>
-          ) : (
+        ) : (
             tasks.map(task => (
-              <TaskItem
-                key={task.id}
-                task={task}
-                onDelete={handleDelete}
-                onToggle={handleToggle}
-                onEdit={handleEdit}
-              />
-            ))
-          )}
+            <TaskItem
+              key={task.id}
+              task={task}
+              onDelete={handleDelete}
+              onToggle={handleToggle}
+              onEdit={handleEdit}
+            />
+          ))
+        )}
         </div>
       </div>
     </div>
