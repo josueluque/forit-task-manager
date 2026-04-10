@@ -112,7 +112,7 @@ const TaskList = () => {
           onClick={() => setFilter('todos')}
           className={`text-xs rounded-lg px-4 py-2 cursor-pointer transition-colors ${
             filter === 'todos'
-              ? 'bg-[#0284c7] text-white'
+              ? 'bg-[#0284c7] text-white font-medium'
               : 'border border-[#0f1e35] text-[#334d66] hover:bg-[#0f1e35]'
           }`}
         >
@@ -122,7 +122,7 @@ const TaskList = () => {
           onClick={() => setFilter('pendientes')}
           className={`text-xs rounded-lg px-4 py-2 cursor-pointer transition-colors ${
             filter === 'pendientes'
-              ? 'bg-[#0284c7] text-white'
+              ? 'bg-[#0284c7] text-white font-medium'
               : 'border border-[#0f1e35] text-[#334d66] hover:bg-[#0f1e35]'
           }`}
         >
@@ -132,7 +132,7 @@ const TaskList = () => {
           onClick={() => setFilter('completadas')}
           className={`text-xs rounded-lg px-4 py-2 cursor-pointer transition-colors ${
             filter === 'completadas'
-              ? 'bg-[#0284c7] text-white'
+              ? 'bg-[#0284c7] text-white font-medium'
               : 'border border-[#0f1e35] text-[#334d66] hover:bg-[#0f1e35]'
           }`}
         >
