@@ -61,7 +61,7 @@ const TaskForm = ({ onSubmit, onCancel, taskToEdit }: TaskFormProps) => {
         </button>
         <button
           onClick={handleSubmit}
-          className="text-xs text-gray-100 bg-[#0b38ff] rounded-lg px-4 py-2 cursor-pointer hover:bg-[#1540ff] transition-colors"
+          className="text-xs text-gray-100 bg-[#0284c7] rounded-lg px-4 py-2 cursor-pointer hover:bg-[#0284c7] transition-colors"
         >
           {taskToEdit ? 'Guardar' : 'Agregar'}
         </button>

@@ -9,13 +9,15 @@ interface TaskItemProps {
 
 const TaskItem = ({ task, onDelete, onToggle, onEdit }: TaskItemProps) => {
   return (
-    <div className="flex items-center gap-3 bg-[#0a1220] border border-[#0f1e35] rounded-xl p-4">
+    <div className="flex items-center gap-3 bg-[#1e242e] border border-[#1e242e] rounded-xl p-4">
       <button
         onClick={() => onToggle(task.id, !task.completed)}
-        className={`w-5 h-5 rounded-md border-2 shrink-0 cursor-pointer ${
-          task.completed ? 'bg-[#0b38ff] border-[#0b38ff]' : 'border-[#0b38ff]'
+        className={`w-5 h-5.5 rounded-md border-2 shrink-0 cursor-pointer ${
+          task.completed ? 'text-white bg-[#0284c7] border-[#0284c7]' : 'border-[#0284c7]'
         }`}
-      />
+      >
+        {task.completed ? "✓" : ""}
+      </button>
       <div className="flex-1">
         <p className={`text-sm font-medium ${task.completed ? 'line-through text-[#334d66]' : 'text-gray-100'}`}>
           {task.title}
@@ -25,13 +27,13 @@ const TaskItem = ({ task, onDelete, onToggle, onEdit }: TaskItemProps) => {
       <div className="flex gap-2">
         <button
           onClick={() => onEdit(task)}
-          className="text-xs font-medium text-gray-100 bg-[#0b38ff] rounded-lg px-3 py-1 cursor-pointer hover:bg-[#1540ff] transition-colors"
+          className="text-xs font-medium text-gray-100 bg-[#0284c7] rounded-lg px-3 py-1 cursor-pointer hover:bg-[#0e93d6] transition-colors"
         >
           Editar
         </button>
         <button
           onClick={() => onDelete(task.id)}
-          className="text-xs font-medium text-gray-100 bg-[#da3333] rounded-lg px-3 py-1 cursor-pointer hover:bg-[#ff004c] transition-colors"
+          className="text-xs font-medium text-gray-100 bg-[#c72929] rounded-lg px-3 py-1 cursor-pointer hover:bg-[#ff004c] transition-colors"
         >
           Eliminar
         </button>
