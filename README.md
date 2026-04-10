@@ -21,3 +21,8 @@ cd frontend
 pnpm install
 pnpm dev
 ```
+
+## Vista previa
+![vista principal](https://github.com/josueluque/forit-task-manager/blob/main/frontend/src/assets/principal.png?raw=true)
+![vista crear tarea](https://github.com/josueluque/forit-task-manager/blob/main/frontend/src/assets/crear.png?raw=true)
+![vista editar tarea](https://github.com/josueluque/forit-task-manager/blob/main/frontend/src/assets/editar.png?raw=true)
