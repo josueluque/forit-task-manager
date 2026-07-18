@@ -10,11 +10,25 @@ const TaskList = () => {
   const [taskToEdit, setTaskToEdit] = useState<Task | null>(null)
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState<'todos' | 'pendientes' | 'completadas'>('todos')
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const stored = localStorage.getItem('theme')
+    if (stored === 'light' || stored === 'dark') return stored
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  })
 
 
   useEffect(() => {
     fetchTasks()
   }, [])
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
+  }
 
   const fetchTasks = async () => {
     try {
@@ -90,14 +104,33 @@ const TaskList = () => {
       <div className="max-w-xl mx-auto bg-surface border border-border rounded-xl p-6">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-fg text-xl font-medium">Mis tareas</h1>
-          {!showForm && (
+          <div className="flex items-center gap-2">
             <button
-              onClick={() => setShowForm(true)}
-              className="text-xs font-medium text-white bg-primary rounded-lg px-4 py-2 cursor-pointer hover:bg-primary-hover transition-colors"
+              onClick={toggleTheme}
+              aria-label={theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
+              title={theme === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
+              className="text-muted border border-border rounded-lg p-2 cursor-pointer hover:bg-elevated hover:text-fg transition-colors"
             >
-              Agregar tarea
+              {theme === 'dark' ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+              )}
             </button>
-          )}
+            {!showForm && (
+              <button
+                onClick={() => setShowForm(true)}
+                className="text-xs font-medium text-white bg-primary rounded-lg px-4 py-2 cursor-pointer hover:bg-primary-hover transition-colors"
+              >
+                Agregar tarea
+              </button>
+            )}
+          </div>
         </div>
 
         <input
