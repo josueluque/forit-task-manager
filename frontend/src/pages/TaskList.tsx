@@ -4,17 +4,35 @@ import TaskItem from '../components/TaskItem'
 import TaskForm from '../components/TaskForm'
 import * as tasksService from '../services/task'
 
+type Theme = 'light' | 'dark'
+
+// localStorage can throw (SecurityError) in storage-restricted contexts such
+// as sandboxed iframes, so every access falls back to the system preference.
+const getInitialTheme = (): Theme => {
+  try {
+    const stored = localStorage.getItem('theme')
+    if (stored === 'light' || stored === 'dark') return stored
+  } catch {
+    // storage unavailable, fall through to the media query
+  }
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+const storeTheme = (theme: Theme) => {
+  try {
+    localStorage.setItem('theme', theme)
+  } catch {
+    // storage unavailable, keep the in-memory theme only
+  }
+}
+
 const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([])
   const [showForm, setShowForm] = useState(false)
   const [taskToEdit, setTaskToEdit] = useState<Task | null>(null)
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState<'todos' | 'pendientes' | 'completadas'>('todos')
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    const stored = localStorage.getItem('theme')
-    if (stored === 'light' || stored === 'dark') return stored
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  })
+  const [theme, setTheme] = useState<Theme>(getInitialTheme)
 
 
   useEffect(() => {
@@ -23,7 +41,7 @@ const TaskList = () => {
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark')
-    localStorage.setItem('theme', theme)
+    storeTheme(theme)
   }, [theme])
 
   const toggleTheme = () => {
