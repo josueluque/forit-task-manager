@@ -86,14 +86,14 @@ const TaskList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0f1e] px-4 py-8">
-      <div className="max-w-xl mx-auto bg-[#1a1d27] border border-[#2a2d3a] rounded-xl p-6">
+    <div className="min-h-screen bg-canvas px-4 py-8">
+      <div className="max-w-xl mx-auto bg-surface border border-border rounded-xl p-6">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-gray-100 text-xl font-medium">Mis tareas</h1>
+          <h1 className="text-fg text-xl font-medium">Mis tareas</h1>
           {!showForm && (
             <button
               onClick={() => setShowForm(true)}
-              className="text-xs font-medium text-gray-100 bg-[#0284c7] rounded-lg px-4 py-2 cursor-pointer hover:bg-[#0e93d6] transition-colors"
+              className="text-xs font-medium text-white bg-primary rounded-lg px-4 py-2 cursor-pointer hover:bg-primary-hover transition-colors"
             >
               Agregar tarea
             </button>
@@ -105,15 +105,15 @@ const TaskList = () => {
           placeholder="Buscar tareas..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full bg-[#0a1220] border border-[#0f1e35] rounded-lg px-3 py-2 text-sm text-[#f0f9ff] placeholder-[#334d66] mb-6 focus:outline-none focus:border-[#0284c7]"
+          className="w-full bg-input border border-input-border rounded-lg px-3 py-2 text-sm text-fg placeholder-muted mb-6 focus:outline-none focus:border-primary"
         />
         <div className="flex gap-2 mb-6">
         <button
           onClick={() => setFilter('todos')}
           className={`text-xs rounded-lg px-4 py-2 cursor-pointer transition-colors ${
             filter === 'todos'
-              ? 'bg-[#0284c7] text-white font-medium'
-              : 'border border-[#0f1e35] text-[#334d66] hover:bg-[#0f1e35]'
+              ? 'bg-primary text-white font-medium'
+              : 'border border-border text-muted hover:bg-elevated'
           }`}
         >
           Todas
@@ -122,8 +122,8 @@ const TaskList = () => {
           onClick={() => setFilter('pendientes')}
           className={`text-xs rounded-lg px-4 py-2 cursor-pointer transition-colors ${
             filter === 'pendientes'
-              ? 'bg-[#0284c7] text-white font-medium'
-              : 'border border-[#0f1e35] text-[#334d66] hover:bg-[#0f1e35]'
+              ? 'bg-primary text-white font-medium'
+              : 'border border-border text-muted hover:bg-elevated'
           }`}
         >
           Pendientes
@@ -132,8 +132,8 @@ const TaskList = () => {
           onClick={() => setFilter('completadas')}
           className={`text-xs rounded-lg px-4 py-2 cursor-pointer transition-colors ${
             filter === 'completadas'
-              ? 'bg-[#0284c7] text-white font-medium'
-              : 'border border-[#0f1e35] text-[#334d66] hover:bg-[#0f1e35]'
+              ? 'bg-primary text-white font-medium'
+              : 'border border-border text-muted hover:bg-elevated'
           }`}
         >
           Completadas
@@ -152,7 +152,7 @@ const TaskList = () => {
 
         <div className="flex flex-col gap-3">
           {filteredTasks.length === 0 ? (
-            <p className="text-gray-600 text-sm text-center py-8">No hay tareas todavia</p>
+            <p className="text-muted text-sm text-center py-8">No hay tareas todavia</p>
         ) : (
             filteredTasks.map(task => (
             <TaskItem
