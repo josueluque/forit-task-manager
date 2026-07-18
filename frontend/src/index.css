@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+/* Tokens de color semanticos. Los valores por defecto son el tema claro;
+   la clase .dark en <html> sobreescribe con la paleta oscura. */
+@theme {
+  --color-canvas: #f4f6fb;
+  --color-surface: #ffffff;
+  --color-elevated: #eef1f7;
+  --color-border: #d5dae4;
+  --color-fg: #0f172a;
+  --color-muted: #475569;
+  --color-primary: #0284c7;
+  --color-primary-hover: #0369a1;
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-input: #ffffff;
+  --color-input-border: #cbd5e1;
+}
+
+.dark {
+  --color-canvas: #0a0f1e;
+  --color-surface: #1a1d27;
+  --color-elevated: #1e242e;
+  --color-border: #2a2d3a;
+  --color-fg: #f1f5f9;
+  --color-muted: #94a3b8;
+  --color-primary: #0284c7;
+  --color-primary-hover: #0e93d6;
+  --color-danger: #c72929;
+  --color-danger-hover: #ff004c;
+  --color-input: #0a1220;
+  --color-input-border: #0f1e35;
+}
