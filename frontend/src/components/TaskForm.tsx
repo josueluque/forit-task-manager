@@ -31,8 +31,8 @@ const TaskForm = ({ onSubmit, onCancel, taskToEdit }: TaskFormProps) => {
   }
 
   return (
-    <div className="bg-[#1a1d27] border border-[#2a2d3a] rounded-xl p-4 mb-6">
-      <h2 className="text-gray-100 text-sm font-medium mb-4">
+    <div className="bg-surface border border-border rounded-xl p-4 mb-6">
+      <h2 className="text-fg text-sm font-medium mb-4">
         {taskToEdit ? 'Editar tarea' : 'Nueva tarea'}
       </h2>
       <input
@@ -40,28 +40,28 @@ const TaskForm = ({ onSubmit, onCancel, taskToEdit }: TaskFormProps) => {
         placeholder="Titulo"
         value={title}
         onChange={e => setTitle(e.target.value)}
-        className="w-full bg-[#0f1117] border border-[#2a2d3a] rounded-lg px-3 py-2 text-sm text-gray-100 placeholder-gray-600 mb-3 focus:outline-none focus:border-blue-500"
+        className="w-full bg-input border border-input-border rounded-lg px-3 py-2 text-sm text-fg placeholder-muted mb-3 focus:outline-none focus:border-primary"
       />
       {error && (
-        <p className="text-xs text-[#da3333] mb-3 w-88">{error}</p>
+        <p className="text-xs text-danger mb-3 w-88">{error}</p>
       )}
-      
+
       <textarea
         placeholder="Descripción opcional"
         value={description}
         onChange={e => setDescription(e.target.value)}
-        className="w-full bg-[#0f1117] border border-[#2a2d3a] rounded-lg px-3 py-2 text-sm text-gray-100 placeholder-gray-600 mb-4 focus:outline-none focus:border-blue-500 resize-none h-20"
+        className="w-full bg-input border border-input-border rounded-lg px-3 py-2 text-sm text-fg placeholder-muted mb-4 focus:outline-none focus:border-primary resize-none h-20"
       />
       <div className="flex gap-2 justify-end">
         <button
           onClick={onCancel}
-          className="text-xs text-gray-100 border border-[#1c2a3f] rounded-lg px-4 py-2 cursor-pointer hover:bg-[#1c2a3f] transition-colors"
+          className="text-xs text-fg border border-border rounded-lg px-4 py-2 cursor-pointer hover:bg-elevated transition-colors"
         >
           Cancelar
         </button>
         <button
           onClick={handleSubmit}
-          className="text-xs text-gray-100 bg-[#0284c7] rounded-lg px-4 py-2 cursor-pointer hover:bg-[#0284c7] transition-colors"
+          className="text-xs text-white bg-primary rounded-lg px-4 py-2 cursor-pointer hover:bg-primary-hover transition-colors"
         >
           {taskToEdit ? 'Guardar' : 'Agregar'}
         </button>
