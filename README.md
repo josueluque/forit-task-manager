@@ -23,6 +23,7 @@ pnpm dev
 ```
 
 ## Vista previa
-![vista principal](https://github.com/josueluque/forit-task-manager/blob/main/frontend/src/assets/principal.png?raw=true)
-![vista crear tarea](https://github.com/josueluque/forit-task-manager/blob/main/frontend/src/assets/crear.png?raw=true)
-![vista editar tarea](https://github.com/josueluque/forit-task-manager/blob/main/frontend/src/assets/editar.png?raw=true)
+
+<img width="1000" height="720" alt="image" src="https://github.com/user-attachments/assets/028eb419-4eb2-4f3d-932c-6dd5df64e851" />
+<img width="1000" height="720" alt="image" src="https://github.com/user-attachments/assets/92f79a29-03d8-4ab3-b4db-c09b078d1d4d" />
+<img width="1000" height="720" alt="image" src="https://github.com/user-attachments/assets/3a868046-a18e-4dd5-9c08-78d215b4b34b" />
